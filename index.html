@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>18+ Leaks | #1 Content</title>
+    
+    <meta name="description" content="18+ Leaks is the #1 Content Community On Discord. Join 100,000+ members in our active lounges.">
+    <meta name="keywords" content="community discord, social discord server, premium content">
+    <meta name="robots" content="index, follow">
+    
+    <link rel="icon" href="images/icon.jpg">
+    <link href="./Goontopia_files/css2" rel="stylesheet">
+    <script src="./Goontopia_files/lucide@latest"></script>
+
+    <style>
+        :root {
+            --primary: #FF3E6C;
+            --gold: #FBBF24;
+            --bg-dark: #000000;
+            --text-main: #ffffff;
+            --text-muted: #a0a0a0;
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --glass-hover: rgba(255, 255, 255, 0.06);
+        }
+
+        * { 
+            margin: 0; padding: 0; box-sizing: border-box; 
+            font-family: 'Inter', sans-serif; 
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            min-height: 100vh;
+            overflow-x: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* --- Initial Loading Screen --- */
+        .loader-overlay {
+            position: fixed; inset: 0; z-index: 9999;
+            backdrop-filter: blur(28px); -webkit-backdrop-filter: blur(28px);
+            background: rgba(0,0,0,0.65);
+            display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px;
+            transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.8s;
+        }
+        .loader-text {
+            font-size: 0.75rem; font-weight: 700; letter-spacing: 0.35em; text-transform: uppercase;
+            color: rgba(255,255,255,0.7);
+        }
+        .loader-spinner {
+            width: 22px; height: 22px; border-radius: 50%;
+            border: 2px solid rgba(255,255,255,0.12);
+            border-top-color: rgba(255,255,255,0.8);
+            animation: spin 0.9s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* --- Responsive Video Background --- */
+        .video-bg-container {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -3;
+            background-color: #000; /* Fallback color */
+        }
+        
+        .video-desktop-wrapper, .video-mobile-wrapper {
+            width: 100%; height: 100%;
+        }
+        
+        .video-desktop, .video-mobile {
+            width: 100%; height: 100%; object-fit: cover; display: block;
+        }
+
+        .video-desktop-wrapper { display: block; }
+        .video-mobile-wrapper { display: none; }
+
+        @media (max-width: 768px) {
+            .video-desktop-wrapper { display: none; }
+            .video-mobile-wrapper { display: block; }
+        }
+
+        /* Dark overlay for readability */
+        .dark-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.50); z-index: -2;
+        }
+
+        .noise-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.04'/%3E%3C/svg%3E");
+            pointer-events: none; z-index: -1;
+        }
+
+        /* --- Main Layout --- */
+        .wrapper {
+            max-width: 580px; width: 90%;
+            padding: 4rem 0; z-index: 10;
+            animation: fadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.4s forwards;
+            opacity: 0; transform: translateY(20px);
+        }
+
+        /* --- Header --- */
+        header { text-align: center; margin-bottom: 3rem; }
+        
+        .avatar {
+            width: 96px; height: 96px; border-radius: 50%;
+            margin: 0 auto 1.5rem auto;
+            background: url('images/icon.jpg') center/cover;
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+            transition: transform 0.4s ease;
+        }
+        .avatar:hover { transform: scale(1.05); }
+
+        .title {
+            font-size: 2.5rem; font-weight: 700; letter-spacing: -0.03em;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            font-size: 1rem; color: var(--text-muted); font-weight: 400;
+        }
+
+        /* --- Status Pills --- */
+        .status-container {
+            display: flex; justify-content: center; gap: 0.75rem; flex-wrap: wrap;
+            margin-top: 1.5rem;
+        }
+        .status-pill {
+            display: flex; align-items: center; gap: 6px;
+            padding: 0.5rem 1rem; border-radius: 999px;
+            background: var(--glass-bg); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            font-size: 0.85rem; font-weight: 500; color: #e0e0e0;
+        }
+        .dot { width: 6px; height: 6px; border-radius: 50%; }
+        .dot-green { background: #10B981; box-shadow: 0 0 8px rgba(16, 185, 129, 0.5); }
+
+        /* --- Links --- */
+        .link-grid { display: flex; flex-direction: column; gap: 1rem; }
+        
+        .link-card {
+            display: flex; align-items: center; padding: 1rem;
+            background: var(--glass-bg); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border); border-radius: 16px;
+            text-decoration: none; color: white; transition: all 0.3s ease;
+        }
+
+        .link-card:hover {
+            background: var(--glass-hover);
+            border-color: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .card-icon {
+            width: 54px; height: 54px; display: flex; justify-content: center; align-items: center;
+            border-radius: 12px; font-size: 1.5rem; margin-right: 1.25rem;
+            background: rgba(255,255,255,0.05); color: var(--text-main);
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .primary-icon { color: #5865F2; }
+        .link-card:hover .primary-icon { color: white; background: #5865F2; }
+
+        .card-content { flex: 1; }
+        .card-title { font-size: 1.05rem; font-weight: 600; margin-bottom: 2px; }
+        .card-desc { font-size: 0.85rem; color: var(--text-muted); line-height: 1.4; }
+        
+        .card-arrow { 
+            font-size: 1.25rem; color: var(--text-muted); 
+            transition: transform 0.3s ease, color 0.3s ease; 
+        }
+        .link-card:hover .card-arrow { 
+            color: var(--text-main); 
+            transform: translateX(4px); 
+        }
+
+        /* --- Golden VIP Badge --- */
+        .badge-vip {
+            display: inline-flex; align-items: center; gap: 4px;
+            padding: 3px 8px; border-radius: 999px;
+            background: rgba(251, 191, 36, 0.15); 
+            border: 1px solid rgba(251, 191, 36, 0.4);
+            font-size: 0.65rem; font-weight: 800; letter-spacing: 0.1em;
+            text-transform: uppercase; color: var(--gold);
+            animation: pulse-glow-gold 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        @keyframes pulse-glow-gold {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(251, 191, 36, 0.5); opacity: 1; }
+            50% { box-shadow: 0 0 0 6px rgba(251, 191, 36, 0); opacity: 0.8; }
+        }
+
+        /* --- About Section --- */
+        .about-card {
+            margin-top: 2.5rem; padding: 1.5rem;
+            background: var(--glass-bg); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border); border-radius: 16px;
+            text-align: center;
+        }
+        .about-title { 
+            font-size: 0.9rem; font-weight: 600; color: var(--text-main); 
+            margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em;
+        }
+        .about-text { 
+            font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; 
+        }
+
+        /* --- Footer --- */
+        footer { 
+            margin-top: 2.5rem; text-align: center; 
+            font-size: 0.8rem; color: var(--text-muted); 
+        }
+        footer a { 
+            color: var(--text-muted); text-decoration: none; transition: color 0.2s; cursor: pointer;
+        }
+        footer a:hover { color: var(--text-main); }
+
+        /* --- Modals --- */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+            z-index: 100; display: flex; align-items: center; justify-content: center;
+            opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
+        }
+        .modal-overlay.active {
+            opacity: 1; pointer-events: all;
+        }
+        .modal-content {
+            background: rgba(15, 15, 15, 0.9); border: 1px solid var(--glass-border); border-radius: 20px;
+            width: 90%; max-width: 500px; padding: 2rem; position: relative;
+            transform: translateY(20px); transition: transform 0.3s ease;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+            text-align: left;
+        }
+        .modal-overlay.active .modal-content {
+            transform: translateY(0);
+        }
+        .modal-title {
+            font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem; color: var(--text-main);
+        }
+        .modal-body {
+            max-height: 60vh; overflow-y: auto; padding-right: 10px;
+        }
+        .modal-body::-webkit-scrollbar { width: 6px; }
+        .modal-body::-webkit-scrollbar-track { background: rgba(255,255,255,0.05); border-radius: 10px; }
+        .modal-body::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 10px; }
+        .modal-body p {
+            font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 1rem;
+        }
+        .modal-body strong { color: #ffffff; }
+        
+        .modal-close {
+            position: absolute; top: 1.5rem; right: 1.5rem;
+            background: none; border: none; color: var(--text-muted);
+            cursor: pointer; transition: color 0.2s; display: flex;
+        }
+        .modal-close:hover { color: var(--text-main); }
+
+        /* --- Animations --- */
+        @keyframes fadeUp { 
+            to { transform: translateY(0); opacity: 1; } 
+        }
+
+        @media (max-width: 768px) {
+            .wrapper { padding: 2rem 0; }
+            .title { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Loading Screen Overlay -->
+    <div id="pageLoader" class="loader-overlay" style="opacity: 0; visibility: hidden;">
+        <p class="loader-text">Goontopia</p>
+        <div class="loader-spinner"></div>
+    </div>
+
+    <!-- 
+      Responsive Video Background 
+      Added 'poster' attribute to display an image if Low Power Mode blocks the video 
+    -->
+    <div class="video-bg-container">
+        <!-- Desktop Video -->
+        <div class="video-desktop-wrapper">
+            <video id="bg-video-desktop" class="video-desktop" autoplay="" loop="" muted="" playsinline="" src="bg.mp4"></video>
+        </div>
+        <!-- Mobile Video -->
+        <div class="video-mobile-wrapper">
+            <video id="bg-video-mobile" class="video-mobile" autoplay="" loop="" muted="" playsinline="" src="bg-mobile.mp4"></video>
+        </div>
+    </div>
+    
+    <!-- Dark & Noise Overlays -->
+    <div class="dark-overlay"></div>
+    <div class="noise-overlay"></div>
+
+    <div class="wrapper">
+        <header>
+            <div class="avatar"></div>
+            <h1 class="title">Goontopia</h1>
+            <p class="subtitle">Best Content On The Internet!</p>
+            
+            <div class="status-container">
+                <div class="status-pill"><span class="dot dot-green"></span> 100,000+ Members</div>
+                <div class="status-pill"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="folder-check" aria-hidden="true" style="width: 14px; height: 14px;" class="lucide lucide-folder-check"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"></path><path d="m9 13 2 2 4-4"></path></svg> #1 Amateur &amp; OF Content</div>
+            </div>
+        </header>
+
+        <div class="link-grid"> 
+            <a href="https://discord.gg/s62W5f844J" class="link-card" target="_blank" rel="nofollow noopener noreferrer">
+                <div class="card-icon primary-icon" style="transition: 0.3s ease;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" width="26" height="26" fill="currentColor" aria-hidden="true"><path d="M524.531,69.836a1.5,1.5,0,0,0-.764-.7A485.065,485.065,0,0,0,404.081,32.03a1.816,1.816,0,0,0-1.923.91,337.461,337.461,0,0,0-14.9,30.6,447.848,447.848,0,0,0-134.426,0,309.541,309.541,0,0,0-15.135-30.6,1.89,1.89,0,0,0-1.924-.91A483.689,483.689,0,0,0,116.085,69.137a1.712,1.712,0,0,0-.788.676C39.068,183.651,18.186,294.69,28.43,404.354a2.016,2.016,0,0,0,.765,1.375A487.666,487.666,0,0,0,176.02,479.918a1.9,1.9,0,0,0,2.063-.676A348.2,348.2,0,0,0,208.12,430.4a1.86,1.86,0,0,0-1.019-2.588,321.173,321.173,0,0,1-45.868-21.853,1.885,1.885,0,0,1-.185-3.126c3.082-2.309,6.166-4.711,9.109-7.137a1.819,1.819,0,0,1,1.9-.256c96.229,43.917,200.41,43.917,295.5,0a1.812,1.812,0,0,1,1.924.233c2.944,2.426,6.027,4.851,9.132,7.16a1.884,1.884,0,0,1-.162,3.126,301.407,301.407,0,0,1-45.89,21.83,1.875,1.875,0,0,0-1,2.611,391.055,391.055,0,0,0,30.014,48.815,1.864,1.864,0,0,0,2.063.7A486.048,486.048,0,0,0,610.7,405.729a1.882,1.882,0,0,0,.765-1.352C623.729,277.594,590.933,167.465,524.531,69.836ZM222.491,337.58c-28.972,0-52.844-26.587-52.844-59.239S193.056,219.1,222.491,219.1c29.665,0,53.306,26.82,52.843,59.239C275.334,310.993,251.924,337.58,222.491,337.58Zm195.38,0c-28.971,0-52.843-26.587-52.843-59.239S388.437,219.1,417.871,219.1c29.667,0,53.307,26.82,52.844,59.239C470.715,310.993,447.538,337.58,417.871,337.58Z"></path></svg></div>
+                <div class="card-content">
+                    <div class="card-title" style="display: flex; align-items: center; flex-wrap: wrap; gap: 8px;">
+                        Join the Discord Server
+                        <span class="badge-vip"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="12" height="12" fill="currentColor" aria-hidden="true" style="display:inline-block;vertical-align:-2px;"><path d="M309 106c11.4-7 19-19.7 19-34c0-22.1-17.9-40-40-40s-40 17.9-40 40c0 14.4 7.6 27 19 34L209.7 220.6c-9.1 18.2-32.7 23.4-48.6 10.7L72 160c5-6.7 8-15 8-24c0-22.1-17.9-40-40-40S0 113.9 0 136s17.9 40 40 40c.2 0 .5 0 .7 0L86.4 427.4c5.5 30.4 32 52.6 63 52.6l277.2 0c30.9 0 57.4-22.1 63-52.6L535.3 176c.2 0 .5 0 .7 0c22.1 0 40-17.9 40-40s-17.9-40-40-40s-40 17.9-40 40c0 9 3 17.3 8 24l-89.1 71.3c-15.9 12.7-39.5 7.5-48.6-10.7L309 106z"></path></svg> VIP</span>
+                    </div>
+                    <div class="card-desc">Exclusive Homemade Videos, Thousands Of Folders &amp; More Much!</div>
+                </div>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="arrow-right" aria-hidden="true" class="lucide lucide-arrow-right card-arrow"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+            </a>
+        </div>
+
+        <div class="about-card">
+            <h3 class="about-title">About Us</h3>
+            <p class="about-text">
+                Welcome to the all-in-one content hub. We are the premier source for everything trending &amp; rare! Stop searching dozens of different servers; we have exactly what you are looking for all in one place 😈.
+            </p>
+        </div>
+
+        <footer>
+            <p>© 2026 Goontopia • <a href="javascript:void(0)" onclick="openModal(&#39;termsModal&#39;)">Terms</a> • <a href="javascript:void(0)" onclick="openModal(&#39;privacyModal&#39;)">Privacy</a></p>
+        </footer>
+    </div>
+
+    <!-- Terms Modal -->
+    <div class="modal-overlay" id="termsModal">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <button class="modal-close" onclick="closeModal(&#39;termsModal&#39;)"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="x" aria-hidden="true" class="lucide lucide-x"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg></button>
+            <h2 class="modal-title">Terms of Service</h2>
+            <div class="modal-body">
+                <p><strong>1. Age Requirement:</strong> By accessing this website and the linked community, you confirm that you are at least 18 years of age or the legal age of majority in your jurisdiction.</p>
+                <p><strong>2. No Affiliation:</strong> "Goontopia" is an independent directory and community. We are NOT affiliated, associated, authorized, endorsed by, or in any way officially connected with Discord Inc., or any other third-party platforms linked on this website.</p>
+                <p><strong>3. Content Disclaimer:</strong> The links provided on this site lead to third-party platforms. We do not host any of the promoted content directly on this domain. We are not responsible for the content, privacy policies, or practices of any third-party websites or services.</p>
+                <p><strong>4. User Responsibility:</strong> You are solely responsible for your interactions and consumption of content upon leaving this landing page. Accessing third-party links is done entirely at your own risk.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Privacy Modal -->
+    <div class="modal-overlay" id="privacyModal">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <button class="modal-close" onclick="closeModal(&#39;privacyModal&#39;)"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="x" aria-hidden="true" class="lucide lucide-x"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg></button>
+            <h2 class="modal-title">Privacy Policy</h2>
+            <div class="modal-body">
+                <p><strong>1. Data Collection:</strong> This landing page is a static website. We do not directly collect, store, or process any personal identification data (such as names, emails, or IP addresses) from visitors on this domain.</p>
+                <p><strong>2. Third-Party Links:</strong> Our website contains links to external sites (such as Discord). Once you click these links and leave our site, you are subject to the privacy policies and terms of service of those respective platforms. We encourage you to review their policies.</p>
+                <p><strong>3. Tracking &amp; Cookies:</strong> This specific landing page does not utilize tracking cookies. However, third-party platforms you navigate to may use cookies and tracking technologies over which we have no control.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize simple vector icons
+        lucide.createIcons();
+
+        // Loader Script - Removes the loading screen after 1.2 seconds
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const loader = document.getElementById('pageLoader');
+                if(loader) {
+                    loader.style.opacity = '0';
+                    loader.style.visibility = 'hidden';
+                }
+            }, 1200);
+        });
+
+        // --- BULLETPROOF AUTOPLAY & LOW POWER MODE FALLBACK ---
+        document.addEventListener("DOMContentLoaded", function() {
+            const videos = document.querySelectorAll('video');
+            
+            videos.forEach(vid => {
+                // Double check it is muted and inline so mobile browsers don't panic
+                vid.muted = true;
+                vid.setAttribute('playsinline', ''); 
+                
+                // Attempt to play immediately
+                let playPromise = vid.play();
+                
+                if (playPromise !== undefined) {
+                    playPromise.catch(error => {
+                        console.log("Autoplay blocked (likely Low Power Mode). Waiting for user tap to wake.");
+                        
+                        // If Apple blocks it, we set up listeners so the FIRST time the user touches 
+                        // or clicks anywhere on the screen, the video jumps into action.
+                        const forcePlay = () => {
+                            vid.play();
+                            document.body.removeEventListener('touchstart', forcePlay);
+                            document.body.removeEventListener('click', forcePlay);
+                            document.body.removeEventListener('scroll', forcePlay);
+                        };
+                        
+                        document.body.addEventListener('touchstart', forcePlay, { once: true });
+                        document.body.addEventListener('click', forcePlay, { once: true });
+                        document.body.addEventListener('scroll', forcePlay, { once: true });
+                    });
+                }
+            });
+        });
+
+        // Modal Scripts
+        function openModal(id) {
+            document.getElementById(id).classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        window.addEventListener('click', function(e) {
+            if (e.target.classList.contains('modal-overlay')) {
+                e.target.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+    </script>
+
+</body></html>
